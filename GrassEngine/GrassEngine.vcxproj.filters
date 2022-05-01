@@ -21,6 +21,15 @@
     <ClInclude Include="src\utils\Vector2f.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\core\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\core\GOComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\GameObject.cpp">

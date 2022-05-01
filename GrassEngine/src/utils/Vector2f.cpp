@@ -6,5 +6,5 @@ namespace grs
 	{
 		this->x = x;
 		this->y = y;
-	} 
+	}
 } 

@@ -20,6 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\GameObject.h" />
+    <ClInclude Include="src\core\GOComponent.h" />
+    <ClInclude Include="src\core\Scene.h" />
+    <ClInclude Include="src\core\Window.h" />
     <ClInclude Include="src\utils\Vector2f.h" />
   </ItemGroup>
   <ItemGroup>
