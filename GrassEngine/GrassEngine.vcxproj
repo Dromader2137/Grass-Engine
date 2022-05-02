@@ -27,6 +27,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\core\GameObject.cpp" />
+    <ClCompile Include="src\core\GOComponent.cpp" />
+    <ClCompile Include="src\core\Scene.cpp" />
+    <ClCompile Include="src\core\Window.cpp" />
     <ClCompile Include="src\utils\Vector2f.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -51,7 +54,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>

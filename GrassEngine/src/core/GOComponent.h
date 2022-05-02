@@ -11,5 +11,8 @@ namespace grs
 
 			virtual void OnStart();
 			virtual void OnEveryFrame();
+
+			GOComponent();
+			~GOComponent();
 	};
 }

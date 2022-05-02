@@ -15,6 +15,9 @@ namespace grs
 
 			GameObject(Vector2f position, float rotation);
 
+			GameObject();
+			~GameObject();
+
 		private:
 			std::vector<GOComponent> components;
 	};
