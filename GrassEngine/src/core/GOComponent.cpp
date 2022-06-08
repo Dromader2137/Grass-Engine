@@ -2,9 +2,9 @@
 
 namespace grs
 {
+	void GOComponent::OnStart() {}
+	void GOComponent::Update() {}
+
 	GOComponent::GOComponent() {}
 	GOComponent::~GOComponent() {}
-
-	void GOComponent::OnStart() {}
-	void GOComponent::OnEveryFrame() {}
 }

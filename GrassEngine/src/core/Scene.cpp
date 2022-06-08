@@ -9,13 +9,19 @@ namespace grs
 		return &(this->gameObjects);
 	}
 
-	Scene::Scene() {}
-	Scene::~Scene()
+	void Scene::AddGameObject(GameObject gameObject)
 	{
-		while (this->gameObjects.empty() != true)
+		this->gameObjects.push_back(gameObject);
+	}
+
+	void Scene::Update()
+	{
+		for (int i = 0; i < this->gameObjects.size(); ++i)
 		{
-			delete& this->gameObjects.back();
-			this->gameObjects.pop_back();
+			this->gameObjects[i].Update();
 		}
 	}
+
+	Scene::Scene() {}
+	Scene::~Scene() {}
 }

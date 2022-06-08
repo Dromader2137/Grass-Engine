@@ -7,10 +7,13 @@ namespace grs
 	class GOComponent
 	{
 		public:
+			/* Component's name */
 			std::string name;
 
+			/* Called on GameObject start */
 			virtual void OnStart();
-			virtual void OnEveryFrame();
+			/* Called on every frame */
+			virtual void Update();
 
 			GOComponent();
 			~GOComponent();
