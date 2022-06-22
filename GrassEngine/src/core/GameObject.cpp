@@ -16,8 +16,8 @@ namespace grs
 		this->components.push_back(component);
 	}
 
-	template <class T>
-	T* GameObject::GetComponent()
+	/*template <typename T>
+	GOComponent* GameObject::GetComponent()
 	{
 		std::vector<GOComponent*>* cmps = this->GetComponents();
 
@@ -27,7 +27,7 @@ namespace grs
 		}
 
 		return nullptr;
-	}
+	}*/
 
 	void GameObject::OnStart()
 	{

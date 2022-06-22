@@ -37,7 +37,10 @@ namespace grs
 
 			for (int i = 0; i < gos->size(); ++i)
 			{
-				MeshRenderer* mr = gos->at(i)->GetComponent<MeshRenderer>();
+				
+				MeshRenderer* mr = (gos->at(i)->GetComponent<MeshRenderer>());
+
+				std::cout << mr;
 
 				if (mr == nullptr) continue;
 

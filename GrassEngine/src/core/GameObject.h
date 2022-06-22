@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <iostream>
 
 #include "Scene.h"
 #include "GOComponent.h"
@@ -31,8 +32,19 @@ namespace grs
 			/* Adds a component to the GameObject */
 			void AddComponent(GOComponent* component);
 
-			template <class T>
-			T* GetComponent();
+			template <typename T>
+			T* GetComponent()
+			{
+				std::vector<GOComponent*>* cmps = this->GetComponents();
+
+				for (int i = 0; i < cmps->size(); ++i)
+				{
+					std::cout << typeid(*(cmps->at(i))).name() << " " << typeid(T).name() << "\n";
+					if (typeid(*(cmps->at(i))) == typeid(T)) return (T*)(cmps->at(i));
+				}
+
+				return nullptr;
+			}
 
 			void OnStart();
 			void Update();

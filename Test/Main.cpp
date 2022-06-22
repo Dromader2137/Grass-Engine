@@ -14,7 +14,7 @@ int main()
 	grs::components::MeshRenderer renderer = grs::components::MeshRenderer();
 	renderer.a = grs::Vector3f(0.0f, 0.5f, 0.0f);
 	renderer.b = grs::Vector3f(-0.5f, -0.5f, 0.0f);
-	renderer.c = grs::Vector3f(0.5f, 0.5f, 0.0f);
+	renderer.c = grs::Vector3f(0.5f, -0.5f, 0.0f);
 	player.AddComponent(&renderer);
 	mainScene.AddGameObject(&player);
 
