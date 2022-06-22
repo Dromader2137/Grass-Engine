@@ -1,5 +1,6 @@
 #include <iostream>
 #include <typeinfo>
+#include <Windows.h>
 
 #include <GL/glew.h>
 
@@ -36,13 +37,12 @@ namespace grs
 			std::vector<GameObject*>* gos = this->gameObject->scene->GetObjects();
 
 			for (int i = 0; i < gos->size(); ++i)
-			{
-				
-				MeshRenderer* mr = (gos->at(i)->GetComponent<MeshRenderer>());
-
-				std::cout << mr;
+			{	
+				MeshRenderer* mr = gos->at(i)->GetComponent<MeshRenderer>();
 
 				if (mr == nullptr) continue;
+
+				std::cout << this->gameObject->name << " " << mr << "\n";
 
 				glBegin(GL_TRIANGLES);
 				glVertex2f(mr->a.x, mr->a.y);
