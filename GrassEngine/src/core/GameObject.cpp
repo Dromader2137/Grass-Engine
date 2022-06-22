@@ -1,12 +1,40 @@
 #include<vector>
+#include<iostream>
 
 #include "GameObject.h"
 
 namespace grs
 {
-	void GameObject::AddComponent(std::shared_ptr<GOComponent> component)
+	std::vector<GOComponent*>* GameObject::GetComponents()
 	{
+		return &(this->components);
+	}
+
+	void GameObject::AddComponent(GOComponent* component)
+	{
+		component->gameObject = this;
 		this->components.push_back(component);
+	}
+
+	template <class T>
+	T* GameObject::GetComponent()
+	{
+		std::vector<GOComponent*>* cmps = this->GetComponents();
+
+		for (int i = 0; i < cmps->size(); ++i)
+		{
+			if (typeid(cmps->at(i)) == typeid(T)) return cmps->at(i);
+		}
+
+		return nullptr;
+	}
+
+	void GameObject::OnStart()
+	{
+		for (int i = 0; i < this->components.size(); ++i)
+		{
+			this->components[i]->OnStart();
+		}
 	}
 
 	void GameObject::Update()
@@ -16,8 +44,24 @@ namespace grs
 			this->components[i]->Update();
 		}
 	}
+
+	void GameObject::Render()
+	{
+		for (int i = 0; i < this->components.size(); ++i)
+		{
+			this->components[i]->Render();
+		}
+	}
+
+	void GameObject::LateUpdate()
+	{
+		for (int i = 0; i < this->components.size(); ++i)
+		{
+			this->components[i]->LateUpdate();
+		}
+	}
 	
-	GameObject::GameObject(std::string name, Vector2f position, float rotation)
+	GameObject::GameObject(std::string name, Vector3f position, Vector3f rotation)
 	{
 		this->name = name;
 
@@ -26,8 +70,8 @@ namespace grs
 	}
 	GameObject::GameObject()
 	{
-		this->position = Vector2f(0.0f, 0.0f);
-		this->rotation = 0.0f;
+		this->position = Vector3f(0.0f, 0.0f, 0.0f);
+		this->rotation = Vector3f(0.0f, 0.0f, 0.0f);
 	}
 	GameObject::~GameObject() {}
 }

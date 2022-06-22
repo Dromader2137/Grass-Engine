@@ -4,33 +4,47 @@
 #include <string>
 #include <memory>
 
-#include "../Types/Vector2f.h"
+#include "Scene.h"
 #include "GOComponent.h"
 
 namespace grs
 {
+	class Scene;
+
 	class GameObject
 	{
 		public:
+			/* Parent Scene */
+			Scene* scene;
+
 			/* Object's name */
 			std::string name;
 			
 			/* Object's position */
-			Vector2f position;
+			Vector3f position;
 			/* Object's rotation in radians */
-			float rotation;
+			Vector3f rotation;
+
+			/* Return pointers to all GOComponents in a GameObject */
+			std::vector< GOComponent* >* GetComponents();
 
 			/* Adds a component to the GameObject */
-			void AddComponent(std::shared_ptr<GOComponent> component);
+			void AddComponent(GOComponent* component);
 
+			template <class T>
+			T* GetComponent();
+
+			void OnStart();
 			void Update();
+			void Render();
+			void LateUpdate();
 
-			GameObject(std::string name, Vector2f position, float rotation);
+			GameObject(std::string name, Vector3f position, Vector3f rotation);
 			GameObject();
 			~GameObject();
 
 		private:
 			/* List of all components a GameObject has */
-			std::vector<std::shared_ptr<GOComponent> > components;
+			std::vector<GOComponent*> components;
 	};
 }

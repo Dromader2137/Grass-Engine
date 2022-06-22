@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Components.h" />
+    <ClInclude Include="src\Components\Camera.h" />
+    <ClInclude Include="src\Components\MeshRenderer.h" />
     <ClInclude Include="src\Core.h" />
     <ClInclude Include="src\Core\Game.h" />
     <ClInclude Include="src\Core\GameObject.h" />
@@ -26,13 +29,16 @@
     <ClInclude Include="src\Core\Scene.h" />
     <ClInclude Include="src\Types.h" />
     <ClInclude Include="src\Types\Vector2f.h" />
+    <ClInclude Include="src\Types\Vector3f.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Components\Camera.cpp" />
     <ClCompile Include="src\Core\Game.cpp" />
     <ClCompile Include="src\Core\GameObject.cpp" />
     <ClCompile Include="src\Core\GOComponent.cpp" />
     <ClCompile Include="src\Core\Scene.cpp" />
     <ClCompile Include="src\Types\Vector2f.cpp" />
+    <ClCompile Include="src\Types\Vector3f.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

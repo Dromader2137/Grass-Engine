@@ -1,5 +1,7 @@
 #pragma once
 
+#include <GLFW/glfw3.h>
+
 #include "Scene.h"
 
 namespace grs
@@ -13,13 +15,18 @@ namespace grs
 			/* Add a new Scene */
 			void AddScene(Scene scene);
 
-			Game();
+			Game(int width, int heigth, std::string);
 			~Game();
 
 		private:
 			/* All active scenes */
 			std::vector<Scene> activeScenes;
 
-			bool isRunning = false;
+			/* Window in which the application run */
+			GLFWwindow* window = nullptr;
+			/* Window dimensions */
+			int WIDTH, HEIGHT;
+			/* Window name */
+			std::string WINDOW_NAME;
 	};
 }
