@@ -8,6 +8,8 @@ namespace grs
 		this->window = glfwCreateWindow(this->WIDTH, this->HEIGHT, this->WINDOW_NAME.c_str(), NULL, NULL);
 		glfwMakeContextCurrent(window);
 
+		glewInit();
+
 		for (int i = 0; i < this->activeScenes.size(); ++i)
 		{
 			this->activeScenes[i].OnStart();

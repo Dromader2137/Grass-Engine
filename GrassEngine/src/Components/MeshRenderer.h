@@ -1,10 +1,7 @@
 #pragma once
 
 #include "../Core.h"
-
-/*
-	!-Debug component-!
-*/
+#include "Vertex.h"
 
 namespace grs
 {
@@ -13,7 +10,7 @@ namespace grs
 		class MeshRenderer : public GOComponent
 		{
 			public:
-				Vector3f a, b, c;
+				std::vector<Vertex> verticies;
 		};
 	}
 }

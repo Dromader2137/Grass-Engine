@@ -39,7 +39,6 @@ namespace grs
 
 				for (int i = 0; i < cmps->size(); ++i)
 				{
-					std::cout << typeid(*(cmps->at(i))).name() << " " << typeid(T).name() << "\n";
 					if (typeid(*(cmps->at(i))) == typeid(T)) return (T*)(cmps->at(i));
 				}
 

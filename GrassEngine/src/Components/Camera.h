@@ -13,8 +13,13 @@ namespace grs
 				static Vector3f position;
 				static Vector3f rotation;
 
+				void OnStart();
 				void Update();
 				void Render();
+
+			private:
+				float* vertexBuffer;
+				unsigned int bufferId;
 		};
 	}
 }
