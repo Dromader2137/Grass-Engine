@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../Core.h"
-#include "Vertex.h"
 
 namespace grs
 {
@@ -10,7 +9,18 @@ namespace grs
 		class MeshRenderer : public GOComponent
 		{
 			public:
-				std::vector<Vertex> verticies;
+				std::vector<float> verticies;
+				std::vector<unsigned int> indexBuffer;
+
+				unsigned int vertexBufferId;
+				unsigned int indexBufferId;
+
+				void AddVertex(Vertex vertex);
+
+				float* GetVerticiesArray();
+				unsigned int* GetIndexBufferArray();
+
+				void OnStart();
 		};
 	}
 }

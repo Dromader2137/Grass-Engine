@@ -9,17 +9,13 @@ namespace grs
 		class Camera : public GOComponent
 		{
 			public:
-				static float size;
+				float sizeOnX, sizeOnY;
 				static Vector3f position;
 				static Vector3f rotation;
 
 				void OnStart();
 				void Update();
 				void Render();
-
-			private:
-				float* vertexBuffer;
-				unsigned int bufferId;
 		};
 	}
 }

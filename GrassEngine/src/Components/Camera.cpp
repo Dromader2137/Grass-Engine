@@ -12,13 +12,12 @@ namespace grs
 {
 	namespace components
 	{
-		float Camera::size;
 		Vector3f Camera::position;
 		Vector3f Camera::rotation;
 
 		void Camera::OnStart()
 		{
-			glGenBuffers(1, &bufferId);
+			std::cout << "Camera init!\n";
 		}
 
 		void Camera::Update()
@@ -31,11 +30,7 @@ namespace grs
 
 		void Camera::Render()
 		{
-			if (bufferId == NULL) return;
-
-			std::cout << "Rendering:\n";
-
-			glBindBuffer(GL_ARRAY_BUFFER, bufferId);
+			std::cout << "Rendering objects:\n";
 
 			if (this->gameObject == nullptr)
 			{
@@ -45,47 +40,20 @@ namespace grs
 
 			std::vector<GameObject*>* gos = this->gameObject->scene->GetObjects();
 
-			int vertexBufferSize = 0, verticiesCount = 0;
-			MeshRenderer* mr;
-
 			for (int i = 0; i < gos->size(); ++i)
-			{	
-				mr = gos->at(i)->GetComponent<MeshRenderer>();
+			{
+				MeshRenderer* mr = gos->at(i)->GetComponent<MeshRenderer>();
 
 				if (mr == nullptr) continue;
 
-				vertexBufferSize += mr->verticies.size() * VERTEX_ELEMENT_COUNT;
-				verticiesCount += mr->verticies.size();
+				glBindBuffer(GL_ARRAY_BUFFER, mr->vertexBufferId);
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mr->indexBufferId);
+
+				glDrawElements(GL_TRIANGLES, mr->indexBuffer.size(), GL_UNSIGNED_INT, nullptr);
+
+				std::cout << gos->at(i)->name << " " << mr->verticies.size() << " " << mr->indexBuffer.size() << "\n";
 			}
 
-			delete[] vertexBuffer;
-			vertexBuffer = new float[vertexBufferSize];
-
-			int placeInBuffer = 0;
-
-			for (int i = 0; i < gos->size(); ++i)
-			{
-				mr = gos->at(i)->GetComponent<MeshRenderer>();
-
-				for (int j = 0; j < mr->verticies.size(); ++j)
-				{
-					vertexBuffer[placeInBuffer] = mr->verticies.at(j).pos.x;
-					++placeInBuffer;
-					vertexBuffer[placeInBuffer] = mr->verticies.at(j).pos.y;
-					++placeInBuffer;
-					vertexBuffer[placeInBuffer] = mr->verticies.at(j).pos.z;
-					++placeInBuffer;
-				}
-			}
-
-			glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertexBufferSize, vertexBuffer, GL_STATIC_DRAW);
-
-			glEnableVertexAttribArray(0);
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
-
-			glDrawArrays(GL_TRIANGLES, 0, verticiesCount);
-
-			std::cout << "Vertex buffer size: " << vertexBufferSize << ". Number of verticies: " << verticiesCount << "\n";
 		}
 	}
 }
