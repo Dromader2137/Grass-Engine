@@ -12,15 +12,10 @@ namespace grs
 				std::vector<float> verticies;
 				std::vector<unsigned int> indexBuffer;
 
-				unsigned int vertexBufferId;
-				unsigned int indexBufferId;
-
 				void AddVertex(Vertex vertex);
 
 				float* GetVerticiesArray();
 				unsigned int* GetIndexBufferArray();
-
-				void OnStart();
 		};
 	}
 }
