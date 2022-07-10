@@ -11,6 +11,8 @@ namespace grs
 		class Shader
 		{
 			public:
+				std::string name;
+
 				std::string vertexSourceCode;
 				std::string fragmentSourceCode;
 		};
