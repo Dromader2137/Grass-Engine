@@ -17,21 +17,34 @@ namespace grs
 
 		void Camera::OnStart()
 		{
-			std::cout << "Camera init!\n";
+			#ifdef _DEBUG
+				std::cout << "----- Camera -----\n\n";
+				std::cout << "Camera initialized!\n";
+			#endif
+
+			glGenBuffers(1, &this->vertexBufferId);
+			glGenBuffers(1, &this->indexBufferId);
+
+			#ifdef _DEBUG
+				std::cout << "Vertex buffer id: " << this->vertexBufferId << "\nIndex buffer id: " << this->indexBufferId << "\n";
+				std::cout << "\n------------------\n";
+			#endif
+
+			glBindBuffer(GL_ARRAY_BUFFER, this->vertexBufferId);
+			glEnableVertexAttribArray(0);
+			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
+
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBufferId);
 		}
 
 		void Camera::Update()
 		{
 			position = this->gameObject->position;
 			rotation = this->gameObject->rotation;
-
-			std::cout << position.x << " " << position.y << " camera's position!\n";
 		}
 
 		void Camera::Render()
 		{
-			std::cout << "Rendering objects:\n";
-
 			if (this->gameObject == nullptr)
 			{
 				std::cout << "Error: gameObject pointer not set!";
@@ -46,12 +59,12 @@ namespace grs
 
 				if (mr == nullptr) continue;
 
-				glBindBuffer(GL_ARRAY_BUFFER, mr->vertexBufferId);
-				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mr->indexBufferId);
+				glBindBuffer(GL_ARRAY_BUFFER, this->vertexBufferId);
+				glBufferData(GL_ARRAY_BUFFER, mr->verticies.size() * sizeof(float), mr->GetVerticiesArray(), GL_DYNAMIC_DRAW);
+				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBufferId);
+				glBufferData(GL_ELEMENT_ARRAY_BUFFER, mr->indexBuffer.size() * sizeof(unsigned int), mr->GetIndexBufferArray(), GL_DYNAMIC_DRAW);
 
 				glDrawElements(GL_TRIANGLES, mr->indexBuffer.size(), GL_UNSIGNED_INT, nullptr);
-
-				std::cout << gos->at(i)->name << " " << mr->verticies.size() << " " << mr->indexBuffer.size() << "\n";
 			}
 
 		}
