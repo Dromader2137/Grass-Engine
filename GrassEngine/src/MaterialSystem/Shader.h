@@ -23,7 +23,7 @@ namespace grs
 				void CompileShader();
 
 			private:
-				static unsigned int CompileTypeShader(std::string* src, GLenum shaderType);
+				unsigned int CompileTypeShader(std::string* src, GLenum shaderType);
 		};
 	}
 }

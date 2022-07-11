@@ -1,6 +1,7 @@
 #include "Shader.h"
 
 #include <iostream>
+#include <windows.h>
 
 namespace grs
 {
@@ -9,14 +10,24 @@ namespace grs
 		void Shader::CompileShader()
 		{
 			this->shader = glCreateProgram();
-
-			unsigned int vs = CompileTypeShader(&this->vertexSourceCode, GL_VERTEX_SHADER);
-			unsigned int fs = CompileTypeShader(&this->fragmentSourceCode, GL_FRAGMENT_SHADER);
+			
+			unsigned int vs = this->CompileTypeShader(&this->vertexSourceCode, GL_VERTEX_SHADER);
+			unsigned int fs = this->CompileTypeShader(&this->fragmentSourceCode, GL_FRAGMENT_SHADER);
 
 			glAttachShader(this->shader, vs);
 			glAttachShader(this->shader, fs);
 			glLinkProgram(this->shader);
 			glValidateProgram(this->shader);
+
+			#ifdef _DEBUG
+			if (vs != 0 and fs != 0)
+			{
+				std::cout << "\n--- Shader compilation succesful! ---\n\nName: " << this->name <<
+					"\n\n--- Vertex code ---\n\n" << this->vertexSourceCode <<
+					"\n--- Fragment code ---\n\n" << this->fragmentSourceCode <<
+					"\n------------------------------------\n";
+			}
+			#endif
 
 			glDeleteShader(vs);
 			glDeleteShader(fs);
@@ -38,8 +49,14 @@ namespace grs
 				char* message = (char*)alloca(length * sizeof(char));
 				glGetShaderInfoLog(id, length, &length, message);
 
-				std::cerr << "Compilation of " << (shaderType == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader failed!\n";
+				#ifdef _DEBUG
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
+				std::cerr << "\nCompilation of " << (shaderType == GL_VERTEX_SHADER ? "vertex" : "fragment") << " part in shader \"" << this->name << "\" failed!\n";
 				std::cerr << "ERROR: " << message << "\n";
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
+				#endif
+
+				return 0;
 			}
 
 			return id;
