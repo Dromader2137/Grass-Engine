@@ -59,6 +59,8 @@ namespace grs
 
 				if (mr == nullptr) continue;
 
+				glUseProgram(mr->material->shader.shader);
+
 				glBindBuffer(GL_ARRAY_BUFFER, this->vertexBufferId);
 				glBufferData(GL_ARRAY_BUFFER, mr->verticies.size() * sizeof(float), mr->GetVerticiesArray(), GL_DYNAMIC_DRAW);
 				glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBufferId);
