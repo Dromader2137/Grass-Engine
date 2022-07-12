@@ -17,7 +17,7 @@ namespace grs
 
 				Shader shader;
 
-				void PrepareShader();
+				virtual void PrepareShader();
 
 				virtual void ApplyParameters() {}
 
