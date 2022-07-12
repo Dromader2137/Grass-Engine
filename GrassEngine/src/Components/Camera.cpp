@@ -18,7 +18,7 @@ namespace grs
 		void Camera::OnStart()
 		{
 			#ifdef _DEBUG
-				std::cout << "----- Camera -----\n\n";
+				std::cout << "-=-=- Camera -=-=-\n\n";
 				std::cout << "Camera initialized!\n";
 			#endif
 
@@ -27,7 +27,7 @@ namespace grs
 
 			#ifdef _DEBUG
 				std::cout << "Vertex buffer id: " << this->vertexBufferId << "\nIndex buffer id: " << this->indexBufferId << "\n";
-				std::cout << "\n------------------\n";
+				std::cout << "\n-=-=-=-=-=-=-=-=-=-\n";
 			#endif
 
 			glBindBuffer(GL_ARRAY_BUFFER, this->vertexBufferId);
@@ -59,7 +59,9 @@ namespace grs
 
 				if (mr == nullptr) continue;
 
-				glUseProgram(mr->material->shader.shader);
+				glUseProgram(mr->material->shader.program);
+
+				mr->material->ApplyParameters();
 
 				glBindBuffer(GL_ARRAY_BUFFER, this->vertexBufferId);
 				glBufferData(GL_ARRAY_BUFFER, mr->verticies.size() * sizeof(float), mr->GetVerticiesArray(), GL_DYNAMIC_DRAW);

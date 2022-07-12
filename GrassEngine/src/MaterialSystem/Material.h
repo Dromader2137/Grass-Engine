@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <map>
 
 #include "../Types.h";
 #include "Shader.h";
@@ -17,6 +18,8 @@ namespace grs
 				Shader shader;
 
 				void PrepareShader();
+
+				virtual void ApplyParameters() {}
 
 				/*
 				void Set1Float(std::string memberName, float value);

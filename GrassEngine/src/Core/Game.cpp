@@ -17,6 +17,9 @@ namespace grs
 
 		while (!glfwWindowShouldClose(window))
 		{
+			int width, height;
+			glfwGetFramebufferSize(window, &width, &height);
+			glViewport(0, 0, width, height);
 			for (int i = 0; i < this->activeScenes.size(); ++i)
 			{
 				this->activeScenes[i].Update();

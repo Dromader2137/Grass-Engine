@@ -9,23 +9,34 @@ namespace grs
 	{
 		void Shader::CompileShader()
 		{
-			this->shader = glCreateProgram();
+			this->program = glCreateProgram();
 			
 			unsigned int vs = this->CompileTypeShader(&this->vertexSourceCode, GL_VERTEX_SHADER);
 			unsigned int fs = this->CompileTypeShader(&this->fragmentSourceCode, GL_FRAGMENT_SHADER);
 
-			glAttachShader(this->shader, vs);
-			glAttachShader(this->shader, fs);
-			glLinkProgram(this->shader);
-			glValidateProgram(this->shader);
+			glAttachShader(this->program, vs);
+			glAttachShader(this->program, fs);
+			glLinkProgram(this->program);
+			glValidateProgram(this->program);
 
 			#ifdef _DEBUG
 			if (vs != 0 and fs != 0)
 			{
-				std::cout << "\n--- Shader compilation succesful! ---\n\nName: " << this->name <<
-					"\n\n--- Vertex code ---\n\n" << this->vertexSourceCode <<
-					"\n--- Fragment code ---\n\n" << this->fragmentSourceCode <<
-					"\n------------------------------------\n";
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+				std::cout << "\n-=- Shader compilation succesful! -=-\n\nName: ";
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
+				std::cout << this->name;
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+				std::cout << "\n\n-=- Vertex code -=-\n\n";
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
+				std::cout << this->vertexSourceCode;
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+				std::cout << "\n-=- Fragment code -=-\n\n";
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
+				std::cout << this->fragmentSourceCode;
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+				std::cout << "\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 			}
 			#endif
 
@@ -51,7 +62,7 @@ namespace grs
 
 				#ifdef _DEBUG
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
-				std::cerr << "\nCompilation of " << (shaderType == GL_VERTEX_SHADER ? "vertex" : "fragment") << " part in shader \"" << this->name << "\" failed!\n";
+				std::cerr << "\nCompilation of " << (shaderType == GL_VERTEX_SHADER ? "vertex" : "fragment") << " part in shader \"" << this->name << "\" failed!\n\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n\n" << *src << "\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n\n";
 				std::cerr << "ERROR: " << message << "\n";
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 				#endif

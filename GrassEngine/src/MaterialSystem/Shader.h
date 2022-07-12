@@ -18,7 +18,7 @@ namespace grs
 				std::string vertexSourceCode;
 				std::string fragmentSourceCode;
 
-				unsigned int shader;
+				unsigned int program;
 
 				void CompileShader();
 
