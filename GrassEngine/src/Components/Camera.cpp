@@ -3,6 +3,8 @@
 #include <Windows.h>
 
 #include <GL/glew.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "Camera.h"
 #include "MeshRenderer.h"
@@ -27,7 +29,7 @@ namespace grs
 
 			#ifdef _DEBUG
 				std::cout << "Vertex buffer id: " << this->vertexBufferId << "\nIndex buffer id: " << this->indexBufferId << "\n";
-				std::cout << "\n-=-=-=-=-=-=-=-=-=-\n";
+				std::cout << "\n-=-=-=-=-=-=-=-=-=-\n\n";
 			#endif
 
 			glBindBuffer(GL_ARRAY_BUFFER, this->vertexBufferId);
@@ -59,9 +61,19 @@ namespace grs
 
 				if (mr == nullptr) continue;
 
+				glm::mat4x4 proj = glm::perspectiveFov<float>(60, this->sizeOnX, this->sizeOnY, 0.01f, 100);
+				glm::mat4x4 view = glm::mat4x4(1.0f);
+				view = glm::translate(view, (glm::vec3(Camera::position.x / 2, Camera::position.y / 2, -Camera::position.z / 2)));
+				glm::mat4x4 model = glm::mat4x4(1.0f);
+				model = glm::translate(view, glm::vec3(-mr->gameObject->position.x, -mr->gameObject->position.y, -mr->gameObject->position.z));
+
+				glm::mat4x4 MVP = proj * view * model;
+
 				glUseProgram(mr->material->shader->program);
 
 				mr->material->ApplyParameters();
+
+				glUniformMatrix4fv(glGetUniformLocation(mr->material->shader->program, "u_MVP"), 1, GL_TRUE, &MVP[0][0]);
 
 				glBindBuffer(GL_ARRAY_BUFFER, this->vertexBufferId);
 				glBufferData(GL_ARRAY_BUFFER, mr->verticies.size() * sizeof(float), mr->GetVerticiesArray(), GL_DYNAMIC_DRAW);

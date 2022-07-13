@@ -25,7 +25,7 @@ namespace grs
 			if (vs != 0 and fs != 0)
 			{
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
-				std::cout << "\n-=- Shader compilation succesful! -=-\n\nName: ";
+				std::cout << "-=- Shader compilation succesful! -=-\n\nName: ";
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
 				std::cout << this->name;
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
@@ -37,7 +37,7 @@ namespace grs
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
 				std::cout << this->fragmentSourceCode;
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
-				std::cout << "\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n";
+				std::cout << "\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n\n";
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 15);
 			}
 			#endif
@@ -87,7 +87,7 @@ namespace grs
 		void InitShaders()
 		{
 			shaders[0].name = "Unlit";
-			shaders[0].vertexSourceCode = "#version 440 core\n\nlayout (location = 0) in vec4 position;\n\nuniform mat4x4 u_MVP;\n\nvoid main()\n{\n\tgl_Position = position;\n}\n";
+			shaders[0].vertexSourceCode = "#version 440 core\n\nlayout (location = 0) in vec4 position;\n\nuniform mat4x4 u_MVP;\n\nvoid main()\n{\n\tgl_Position = vec4(position.xy, -position.z, position.w) * u_MVP;\n}\n";
 			shaders[0].fragmentSourceCode = "#version 440 core\n\nlayout (location = 0) out vec4 color;\n\nuniform vec4 u_baseColor;\n\nvoid main()\n{\n\tcolor = u_baseColor;\n}\n";
 			shaders[0].CompileShader();
 		}
