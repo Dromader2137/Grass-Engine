@@ -59,7 +59,7 @@ namespace grs
 
 				if (mr == nullptr) continue;
 
-				glUseProgram(mr->material->shader.program);
+				glUseProgram(mr->material->shader->program);
 
 				mr->material->ApplyParameters();
 

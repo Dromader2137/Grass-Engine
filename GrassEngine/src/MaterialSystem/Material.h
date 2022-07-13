@@ -3,8 +3,8 @@
 #include <string>
 #include <map>
 
-#include "../Types.h";
-#include "Shader.h";
+#include "../Types.h"
+#include "Shader.h"
 
 namespace grs
 {
@@ -15,7 +15,7 @@ namespace grs
 			public:
 				std::string name;
 
-				Shader shader;
+				Shader* shader;
 
 				virtual void PrepareShader();
 

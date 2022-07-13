@@ -18,12 +18,18 @@ namespace grs
 				std::string vertexSourceCode;
 				std::string fragmentSourceCode;
 
-				unsigned int program;
+				unsigned int program = 0;
 
 				void CompileShader();
+
+				Shader(std::string name, std::string vertexSourceCode, std::string fragmentSourceCode);
+				Shader() {}
 
 			private:
 				unsigned int CompileTypeShader(std::string* src, GLenum shaderType);
 		};
+
+		extern Shader shaders[1];
+		void InitShaders();
 	}
 }

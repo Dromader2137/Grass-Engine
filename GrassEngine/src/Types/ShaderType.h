@@ -4,9 +4,9 @@ namespace grs
 {
 	namespace mat
 	{
-		enum class ShaderType
+		enum ShaderType
 		{
-			Unlit
+			Unlit = 0
 		};
 	}
 }

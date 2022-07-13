@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "../MaterialSystem.h"
 
 namespace grs
 {
@@ -9,6 +10,8 @@ namespace grs
 		glfwMakeContextCurrent(window);
 
 		glewInit();
+
+		mat::InitShaders();
 
 		for (int i = 0; i < this->activeScenes.size(); ++i)
 		{

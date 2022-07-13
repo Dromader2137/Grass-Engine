@@ -9,7 +9,7 @@ namespace grs
 	{
 		void Material::PrepareShader()
 		{
-			shader.CompileShader();
+			
 		}
 	}
 }

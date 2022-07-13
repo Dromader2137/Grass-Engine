@@ -13,6 +13,8 @@ namespace grs
 
 				void ApplyParameters();
 				void PrepareShader();
+
+				UnlitMaterial(Vector3f color);
 		};
 	}
 }
