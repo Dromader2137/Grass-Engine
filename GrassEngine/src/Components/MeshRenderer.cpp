@@ -20,5 +20,10 @@ namespace grs
 		{
 			return &(this->indexBuffer[0]);
 		}
+
+		void MeshRenderer::OnStart()
+		{ 
+			material->PrepareShader();
+		}
 	}
 }
