@@ -9,7 +9,7 @@ namespace grs
 		class Camera : public GOComponent
 		{
 			public:
-				float sizeOnX = 1, sizeOnY = 1;
+				float size = 1;
 				static Vector3f position;
 				static Vector3f rotation;
 

@@ -4,7 +4,10 @@
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include <glm/gtx/quaternion.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+
+//#include <GLFW/glfw3.h>
 
 #include "Camera.h"
 #include "MeshRenderer.h"
@@ -61,11 +64,18 @@ namespace grs
 
 				if (mr == nullptr) continue;
 
-				glm::mat4x4 proj = glm::perspectiveFov<float>(60, this->sizeOnX, this->sizeOnY, 0.01f, 100);
-				glm::mat4x4 view = glm::mat4x4(1.0f);
-				view = glm::translate(view, (glm::vec3(Camera::position.x / 2, Camera::position.y / 2, -Camera::position.z / 2)));
+				int w = 1, h = 1;
+
+				glfwGetWindowSize(Game::window, &w, &h);
+
+				glm::mat4x4 proj = glm::perspectiveFovRH<float>(90, this->size, this->size * (float)(((float)h) / ((float)w)), 0.1f, 100);
+				glm::quat cameraQuaternion = glm::quat(glm::vec3(Camera::rotation.x, Camera::rotation.y, Camera::rotation.z));
+				glm::mat4x4 view = glm::lookAtRH(glm::vec3(0), glm::vec3(0, 0, 1) * cameraQuaternion, glm::vec3(0, 1, 0) * cameraQuaternion);
 				glm::mat4x4 model = glm::mat4x4(1.0f);
-				model = glm::translate(view, glm::vec3(-mr->gameObject->position.x, -mr->gameObject->position.y, -mr->gameObject->position.z));
+				model = glm::translate(model, glm::vec3(mr->gameObject->position.x, mr->gameObject->position.y, mr->gameObject->position.z));
+				model = glm::rotate(model, mr->gameObject->rotation.x, glm::vec3(1, 0, 0));
+				model = glm::rotate(model, mr->gameObject->rotation.y, glm::vec3(0, 1, 0));
+				model = glm::rotate(model, mr->gameObject->rotation.z, glm::vec3(0, 0, 1));
 
 				glm::mat4x4 MVP = proj * view * model;
 

@@ -10,6 +10,9 @@ namespace grs
 	class Game
 	{
 		public:
+			/* Window in which the application run */
+			static GLFWwindow* window;
+
 			/* Start game */
 			void StartGame();
 
@@ -23,8 +26,6 @@ namespace grs
 			/* All active scenes */
 			std::vector<Scene> activeScenes;
 
-			/* Window in which the application run */
-			GLFWwindow* window = nullptr;
 			/* Window dimensions */
 			int WIDTH, HEIGHT;
 			/* Window name */

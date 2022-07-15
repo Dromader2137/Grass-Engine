@@ -3,15 +3,25 @@
 
 namespace grs
 {
+	GLFWwindow* Game::window;
+
 	void Game::StartGame()
 	{
 		glfwInit();
-		this->window = glfwCreateWindow(this->WIDTH, this->HEIGHT, this->WINDOW_NAME.c_str(), NULL, NULL);
+		Game::window = glfwCreateWindow(this->WIDTH, this->HEIGHT, this->WINDOW_NAME.c_str(), NULL, NULL);
 		glfwMakeContextCurrent(window);
+
+		std::cout << "1\n";
 
 		glewInit();
 
+		std::cout << "2\n";
+
+		glEnable(GL_DEPTH_TEST);
+		glDepthFunc(GL_LESS);
 		mat::InitShaders();
+
+		std::cout << "3\n";
 
 		for (int i = 0; i < this->activeScenes.size(); ++i)
 		{
@@ -27,7 +37,7 @@ namespace grs
 			{
 				this->activeScenes[i].Update();
 			}
-			glClear(GL_COLOR_BUFFER_BIT);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			for (int i = 0; i < this->activeScenes.size(); ++i)
 			{
 				this->activeScenes[i].Render();
