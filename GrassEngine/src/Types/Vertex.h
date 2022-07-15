@@ -2,7 +2,7 @@
 
 #define VERTEX_ELEMENT_COUNT 3
 
-#include "../Types.h"
+#include "Types.h"
 
 namespace grs
 {

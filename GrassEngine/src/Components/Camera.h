@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Core.h"
+#include "Core.h"
 
 namespace grs
 {
@@ -9,9 +9,11 @@ namespace grs
 		class Camera : public GOComponent
 		{
 			public:
-				float size = 1;
+				float FOV = 75;
+				
+				
 				static Vector3f position;
-				static Vector3f rotation;
+				static glm::quat rotation;
 
 				unsigned int vertexBufferId;
 				unsigned int indexBufferId;

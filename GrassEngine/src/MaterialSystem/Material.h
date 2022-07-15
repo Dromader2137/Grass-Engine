@@ -3,7 +3,7 @@
 #include <string>
 #include <map>
 
-#include "../Types.h"
+#include "Types.h"
 #include "Shader.h"
 
 namespace grs

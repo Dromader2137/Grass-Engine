@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Core.h"
-#include "../MaterialSystem.h"
+#include "Core.h"
+#include "MaterialSystem.h"
 
 namespace grs
 {

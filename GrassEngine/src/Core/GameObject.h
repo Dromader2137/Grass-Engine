@@ -5,6 +5,9 @@
 #include <memory>
 #include <iostream>
 
+#include <glm/glm.hpp>
+#include <glm/gtx/quaternion.hpp>
+
 #include "Scene.h"
 #include "GOComponent.h"
 
@@ -24,7 +27,7 @@ namespace grs
 			/* Object's position */
 			Vector3f position;
 			/* Object's rotation in radians */
-			Vector3f rotation;
+			glm::quat rotation;
 
 			/* Return pointers to all GOComponents in a GameObject */
 			std::vector< GOComponent* >* GetComponents();

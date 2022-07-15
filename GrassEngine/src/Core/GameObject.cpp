@@ -66,12 +66,12 @@ namespace grs
 		this->name = name;
 
 		this->position = position;
-		this->rotation = rotation;
+		this->rotation = glm::quat(glm::vec3(rotation.x, rotation.y, rotation.z));
 	}
 	GameObject::GameObject()
 	{
 		this->position = Vector3f(0.0f, 0.0f, 0.0f);
-		this->rotation = Vector3f(0.0f, 0.0f, 0.0f);
+		this->rotation = glm::quat();
 	}
 	GameObject::~GameObject() {}
 }

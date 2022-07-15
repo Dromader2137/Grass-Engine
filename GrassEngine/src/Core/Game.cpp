@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "../MaterialSystem.h"
+#include "MaterialSystem.h"
 
 namespace grs
 {
@@ -11,17 +11,11 @@ namespace grs
 		Game::window = glfwCreateWindow(this->WIDTH, this->HEIGHT, this->WINDOW_NAME.c_str(), NULL, NULL);
 		glfwMakeContextCurrent(window);
 
-		std::cout << "1\n";
-
 		glewInit();
-
-		std::cout << "2\n";
 
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LESS);
 		mat::InitShaders();
-
-		std::cout << "3\n";
 
 		for (int i = 0; i < this->activeScenes.size(); ++i)
 		{
