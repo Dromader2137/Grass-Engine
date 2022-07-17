@@ -26,6 +26,7 @@ namespace grs
 			
 			/* Object's position */
 			Vector3f position;
+			Vector3f scale;
 			/* Object's rotation in radians */
 			glm::quat rotation;
 
@@ -53,7 +54,7 @@ namespace grs
 			void Render();
 			void LateUpdate();
 
-			GameObject(std::string name, Vector3f position, Vector3f rotation);
+			GameObject(std::string name, Vector3f position, Vector3f scale, Vector3f rotation);
 			GameObject();
 			~GameObject();
 

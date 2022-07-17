@@ -15,6 +15,8 @@ namespace grs
 			/* Window in which the application run */
 			static GLFWwindow* window;
 
+			static float frameTime;
+
 			/* Start game */
 			void StartGame();
 

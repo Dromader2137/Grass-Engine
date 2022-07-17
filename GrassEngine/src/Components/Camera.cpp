@@ -78,6 +78,7 @@ namespace grs
 				model = glm::rotate(model, modelEuler.x, glm::vec3(1, 0, 0));
 				model = glm::rotate(model, modelEuler.y, glm::vec3(0, 1, 0));
 				model = glm::rotate(model, modelEuler.z, glm::vec3(0, 0, 1));
+				model = glm::scale(model, glm::vec3(mr->gameObject->scale.x, mr->gameObject->scale.y, mr->gameObject->scale.z));
 
 				glm::mat4x4 MVP = proj * view * model;
 

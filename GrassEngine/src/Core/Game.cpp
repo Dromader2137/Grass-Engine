@@ -4,6 +4,7 @@
 namespace grs
 {
 	GLFWwindow* Game::window;
+	float Game::frameTime = 0;
 
 	void Game::StartGame()
 	{
@@ -42,6 +43,9 @@ namespace grs
 				this->activeScenes[i].LateUpdate();
 			}
 			glfwPollEvents();
+
+			Game::frameTime = glfwGetTime();
+			glfwSetTime(0);
 		}
 	}
 

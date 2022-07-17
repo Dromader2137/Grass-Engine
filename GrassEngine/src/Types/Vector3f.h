@@ -8,6 +8,13 @@ namespace grs
 			/* 2 dimensional coordinates */
 			float x, y, z;
 
+			Vector3f operator + (Vector3f a);
+			Vector3f& operator += (Vector3f a);
+			Vector3f operator - (Vector3f a);
+			Vector3f& operator -= (Vector3f a);
+			Vector3f operator * (float a);
+			Vector3f operator / (float a);
+
 			Vector3f(float x, float y, float z);
 			Vector3f();
 			~Vector3f();

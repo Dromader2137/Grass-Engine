@@ -20,6 +20,8 @@ namespace grs
 				float* GetVerticiesArray();
 				unsigned int* GetIndexBufferArray();
 
+				void SetShape(Shape shape);
+
 				void OnStart();
 		};
 	}
