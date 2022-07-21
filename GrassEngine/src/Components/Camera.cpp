@@ -18,7 +18,7 @@ namespace grs
 	namespace components
 	{
 		Vector3f Camera::position;
-		glm::quat Camera::rotation;
+		Quaternion Camera::rotation;
 
 		void Camera::OnStart()
 		{
@@ -68,25 +68,20 @@ namespace grs
 
 				glfwGetWindowSize(Game::window, &w, &h);
 
-				glm::mat4x4 proj = glm::perspectiveFovRH<float>(glm::radians(this->FOV), 1, (float)(((float)h) / ((float)w)), 0.1f, 100);
-				glm::quat cameraQuaternion = glm::quat(glm::vec3(Camera::rotation.x, -Camera::rotation.y, Camera::rotation.z));
-				glm::mat4x4 view = glm::lookAtRH(glm::vec3(0), glm::vec3(0, 0, 1) * cameraQuaternion, glm::vec3(0, 1, 0) * cameraQuaternion);
-				view = glm::translate(view, glm::vec3(Camera::position.x, Camera::position.y, -Camera::position.z));
-				glm::vec3 modelEuler = glm::eulerAngles(mr->gameObject->rotation);
-				glm::mat4x4 model = glm::mat4x4(1.0f);
-				model = glm::translate(model, glm::vec3(-mr->gameObject->position.x, mr->gameObject->position.y, mr->gameObject->position.z));
-				model = glm::rotate(model, modelEuler.x, glm::vec3(1, 0, 0));
-				model = glm::rotate(model, modelEuler.y, glm::vec3(0, 1, 0));
-				model = glm::rotate(model, modelEuler.z, glm::vec3(0, 0, 1));
-				model = glm::scale(model, glm::vec3(mr->gameObject->scale.x, mr->gameObject->scale.y, mr->gameObject->scale.z));
+				Matrix4x4 proj = Matrix4x4::CreatePerspectiveMatrix(this->FOV, h / w, 0.1, 100);
+				Matrix4x4 view = Matrix4x4::CreateLookAtMatrix(Vector3f(), Camera::rotation * Vector3f(0, 0, 1), Camera::rotation * Vector3f(0, 1, 0)) * 
+								 Matrix4x4::CreateTranslateMatrix(Camera::position);
+				Matrix4x4 mdel = Matrix4x4::CreateTranslateMatrix(mr->gameObject->position) * 
+								 Matrix4x4::CreateRotateMatrix(mr->gameObject->rotation) *
+								 Matrix4x4::CreateScaleMatrix(mr->gameObject->scale);
 
-				glm::mat4x4 MVP = proj * view * model;
+				Matrix4x4 MVP = proj * view * mdel;
 
 				glUseProgram(mr->material->shader->program);
 
 				mr->material->ApplyParameters();
 
-				glUniformMatrix4fv(glGetUniformLocation(mr->material->shader->program, "u_MVP"), 1, GL_TRUE, &MVP[0][0]);
+				glUniformMatrix4fv(glGetUniformLocation(mr->material->shader->program, "u_MVP"), 1, GL_TRUE, &MVP.content[0][0]);
 
 				glBindBuffer(GL_ARRAY_BUFFER, this->vertexBufferId);
 				glBufferData(GL_ARRAY_BUFFER, mr->verticies.size() * sizeof(float), mr->GetVerticiesArray(), GL_DYNAMIC_DRAW);

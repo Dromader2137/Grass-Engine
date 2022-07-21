@@ -61,18 +61,18 @@ namespace grs
 		}
 	}
 	
-	GameObject::GameObject(std::string name, Vector3f position, Vector3f scale, Vector3f rotation)
+	GameObject::GameObject(std::string name, Vector3f position, Vector3f scale, Quaternion rotation)
 	{
 		this->name = name;
 
 		this->position = position;
 		this->scale = scale;
-		this->rotation = glm::quat(glm::vec3(rotation.x, rotation.y, rotation.z));
+		this->rotation = rotation;
 	}
 	GameObject::GameObject()
 	{
 		this->position = Vector3f(0.0f, 0.0f, 0.0f);
-		this->rotation = glm::quat();
+		this->rotation = Quaternion();
 		this->scale = Vector3f(1.0f, 1.0f, 1.0f);
 	}
 	GameObject::~GameObject() {}

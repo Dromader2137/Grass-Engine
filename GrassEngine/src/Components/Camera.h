@@ -13,7 +13,7 @@ namespace grs
 				
 				
 				static Vector3f position;
-				static glm::quat rotation;
+				static Quaternion rotation;
 
 				unsigned int vertexBufferId;
 				unsigned int indexBufferId;

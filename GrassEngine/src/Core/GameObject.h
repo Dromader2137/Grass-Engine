@@ -28,7 +28,7 @@ namespace grs
 			Vector3f position;
 			Vector3f scale;
 			/* Object's rotation in radians */
-			glm::quat rotation;
+			Quaternion rotation;
 
 			/* Return pointers to all GOComponents in a GameObject */
 			std::vector< GOComponent* >* GetComponents();
@@ -54,7 +54,7 @@ namespace grs
 			void Render();
 			void LateUpdate();
 
-			GameObject(std::string name, Vector3f position, Vector3f scale, Vector3f rotation);
+			GameObject(std::string name, Vector3f position, Vector3f scale, Quaternion rotation);
 			GameObject();
 			~GameObject();
 
